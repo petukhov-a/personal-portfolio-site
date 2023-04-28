@@ -2,10 +2,14 @@ const navbar = document.querySelector('.navbar');
 const navbarOffsetTop = navbar.offsetTop;
 const sections = document.querySelectorAll('section');
 const navbarLinks = document.querySelectorAll('.navbar-link');
-const progress = document.querySelector('.prgress-bars-wrapper');
-const progreeBarPercents = [97, 89, 85, 87, 80, 70, 50];
+const progress = document.querySelector('.progress-bars-wrapper');
+const progressBarPercents = [97, 89, 85, 87, 80, 70, 50];
 
 window.addEventListener('scroll', () => {
+    mainFn();
+});
+
+const mainFn = () => {
     if (window.scrollY >= navbarOffsetTop) {
         navbar.classList.add('sticky');
     } else {
@@ -22,6 +26,15 @@ window.addEventListener('scroll', () => {
     });
 
     if (window.scrollY + window.innerHeight >= progress.offsetTop) {
-        
+        document.querySelectorAll('.progress-percent').forEach((el, i) => {
+            el.style.width = `${progressBarPercents[i]}%`;
+            el.previousElementSibling.firstElementChild.textContent = progressBarPercents[i];
+        });
     }
+}
+
+mainFn();
+
+window.addEventListener('resize', () => {
+    window.location.reload;
 });
